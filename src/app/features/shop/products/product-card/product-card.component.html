@@ -1,0 +1,128 @@
+<!-- <img
+  src="https://placehold.co/800x500/png"
+  alt="لپ‌تاپ ایسوس X515"
+  class="product-image"
+/> -->
+
+<nz-card class="product-card" [nzBordered]="true" [nzHoverable]="true">
+  <!-- Image -->
+  <div class="product-image-wrapper">
+    <img
+      [src]="product().images[0]"
+      [alt]="product().name"
+      class="product-image"
+    />
+
+    <div class="product-badges">
+      @if (product().isFeatured) {
+        <nz-tag nzColor="gold">
+          <nz-icon nzType="star" nzTheme="fill"></nz-icon>
+          ویژه
+        </nz-tag>
+      }
+
+      @if (product().discount > 0) {
+        <nz-tag nzColor="red"> {{ product().discount }}٪ تخفیف </nz-tag>
+      }
+    </div>
+
+    <button nz-button nzType="default" nzShape="circle" class="favorite-btn">
+      <nz-icon nzType="heart" nzTheme="outline"></nz-icon>
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div class="product-content">
+    <!-- Category / SKU -->
+    <div class="product-meta">
+      <nz-tag nzColor="blue">
+        {{ product().category?.name }}
+      </nz-tag>
+
+      <span class="sku"> Brand: {{ product().brand }} </span>
+    </div>
+
+    <!-- Title -->
+    <h3 class="product-title">
+      {{ product().name }}
+    </h3>
+
+    <p class="product-short-description">
+      {{ product().shortDescription }}
+    </p>
+
+    <!-- Rating -->
+    <div class="rating-row">
+      <nz-rate
+        [ngModel]="product().rating"
+        [nzDisabled]="true"
+        nzAllowHalf
+      ></nz-rate>
+
+      <span class="rating-value">
+        {{ product().rating }}
+      </span>
+
+      <span class="review-count"> ({{ product().reviewCount }} نظر) </span>
+    </div>
+
+    <!-- Stock -->
+    <!-- <div class="stock-section">
+      <div class="stock-header">
+        <span>موجودی</span>
+
+        <strong
+          [class.stock-low]="product.stock <= product.minStock"
+          [class.stock-ok]="product.stock > product.minStock"
+        >
+          {{ product.stock }} عدد
+        </strong>
+      </div>
+    </div> -->
+
+    <!-- Price -->
+    <div class="price-section">
+      <!-- <div class="price-label">قیمت فروش</div> -->
+
+      <div class="price-row">
+        <!-- @if (product().discount > 0) {
+          <span class="old-price">
+            {{ product().price | persianDigit }}
+          </span>
+        } -->
+        <div class="price-label">قیمت حراجی</div>
+        <strong class="final-price">
+          {{ product().finalPrice | persianDigit }}
+          <small>تومان</small>
+        </strong>
+      </div>
+
+      <!-- <div class="profit">
+        سود تقریبی:
+        {{ product().finalPrice - product().costPrice | persianDigit }}
+        تومان
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="product-footer">
+    @if (store.inCartIds().includes(product().id)) {
+      <button nz-button nzType="dashed" nzBlock>به سبد اضافه شد :)</button>
+    } @else {
+      <button
+        nz-button
+        nzType="primary"
+        nzBlock
+        (click)="store.addToCart(product())"
+      >
+        <nz-icon nzType="shopping-cart"></nz-icon>
+        افزودن به سفارش
+      </button>
+    }
+
+    <button nz-button nzType="default" nzShape="circle">
+      <nz-icon nzType="more"></nz-icon>
+    </button>
+  </div>
+</nz-card>

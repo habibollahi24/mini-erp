@@ -1,0 +1,86 @@
+<h2>لیست آخرین سفارسات</h2>
+
+<nz-table
+  #ordersTable
+  [nzData]="orders()"
+  [nzFrontPagination]="false"
+  [nzShowPagination]="false"
+>
+  <thead>
+    <tr>
+      <th>شماره سفارش</th>
+      <th>تاریخ</th>
+      <th>تعداد کالا</th>
+      <th>مبلغ</th>
+      <th>وضعیت سفارش</th>
+      <th>وضعیت پرداخت</th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (order of ordersTable.data; track order.id) {
+      <tr>
+        <td>{{ order.orderNumber }}</td>
+
+        <td>
+          {{ formatDate(order.createdAt) }}
+        </td>
+
+        <td>
+          {{ order.itemsCount }}
+        </td>
+
+        <td>
+          {{ order.total | number }}
+          تومان
+        </td>
+
+        <td>
+          <ng-container
+            [ngTemplateOutlet]="statusTemplate"
+            [ngTemplateOutletContext]="{ $implicit: order.status }"
+          />
+        </td>
+
+        <td>
+          <ng-container
+            [ngTemplateOutlet]="paymentTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: order,
+            }"
+          />
+        </td>
+
+        <td>
+          <ng-container
+            [ngTemplateOutlet]="actionsTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: order,
+            }"
+          />
+        </td>
+      </tr>
+    }
+  </tbody>
+</nz-table>
+
+<ng-template #statusTemplate let-status>
+  <nz-tag [nzColor]="statusColors[status]"> {{ statusLabels[status] }} </nz-tag>
+</ng-template>
+
+<ng-template #paymentTemplate let-order>
+  <div class="payment">
+    <nz-tag [nzColor]="paymentStatusColors[order.paymentStatus]">
+      {{ paymentStatusLabels[order.paymentStatus] ?? order.paymentStatus }}
+    </nz-tag>
+
+    <span class="payment__method">
+      {{ paymentMethodLabels[order.paymentMethod] ?? order.paymentMethod }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #actionsTemplate let-order>
+  <button nz-button nzType="link" (click)="viewOrder(order)">مشاهده</button>
+</ng-template>

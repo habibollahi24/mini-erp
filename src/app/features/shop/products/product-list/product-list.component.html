@@ -1,0 +1,26 @@
+@if (error()) {
+  <nz-result
+    nzStatus="error"
+    nzTitle="خطا در دریافت محصولات"
+    nzSubTitle="در دریافت اطلاعات محصولات مشکلی پیش آمد."
+  >
+    <div nz-result-extra>
+      <button nz-button nzType="primary" (click)="retry()">تلاش مجدد</button>
+    </div>
+  </nz-result>
+}
+
+<nz-spin [nzSpinning]="productsLoading()">
+  <div nz-row [nzGutter]="[16, 16]">
+    @if (products().length === 0 && !productsLoading() && !error()) {
+      <nz-empty nzNotFoundContent="محصولی پیدا نشد" />
+    } @else {
+      @for (product of products(); track product.id) {
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8">
+          <shop-product-card [product]="product" />
+        </div>
+      }
+    }
+  </div>
+</nz-spin>
+<shop-products-pagination [totalItems]="totalItems()" />

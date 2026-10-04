@@ -1,0 +1,27 @@
+<!-- Component ما عملاً تبدیل شده به یک Template Renderer. -->
+
+<ng-container
+  [ngTemplateOutlet]="statCardTemplate"
+  [ngTemplateOutletContext]="{ $implicit: context() }"
+/>
+
+<ng-template #statCardTemplate let-card>
+  <div class="stat-card__top" style="width: 100%">
+    <div class="stat-card__content">
+      <!-- <div class="stat-card__title">
+        {{ card.title }}
+      </div> -->
+      <div class="stat-card__group">
+        <div class="stat-card__description">
+          {{ card.description }}
+        </div>
+        <div class="stat-card__icon">
+          <nz-icon [nzType]="card.icon" nzTheme="outline" />
+        </div>
+      </div>
+      <div class="stat-card__value">
+        {{ card.value | number: "1.0-0" }} <small>{{ card.title }}</small>
+      </div>
+    </div>
+  </div>
+</ng-template>

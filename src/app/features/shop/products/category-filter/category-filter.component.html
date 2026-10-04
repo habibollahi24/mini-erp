@@ -1,0 +1,22 @@
+<!-- <aside class="shop__sidebar">
+  <div (click)="onCategoryFilter(null)">همه</div>
+  @for (category of categories(); track category.id) {
+    <div (click)="onCategoryFilter(category.id)">
+      {{ category.name }}
+      <span>
+        {{ category.productCount }}
+      </span>
+    </div>
+  }
+</aside> -->
+<nz-radio-group
+  [ngModel]="categorySelected()"
+  (ngModelChange)="onCategoryFilter($event)"
+  nzName="radiogroup"
+>
+  @for (category of categories(); track category.id) {
+    <label nz-radio [nzValue]="category.id" style="display: block">
+      {{ category.name }}
+    </label>
+  }
+</nz-radio-group>

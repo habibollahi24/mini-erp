@@ -1,0 +1,40 @@
+<aside class="shop-sidebar">
+  <div class="shop-sidebar__header">
+    <h3>فیلتر محصولات</h3>
+
+    <button
+      nz-button
+      nzType="default"
+      nzSize="small"
+      nzDanger
+      (click)="onResetFilters()"
+    >
+      <nz-icon nzType="close" />
+      <small> پاک کردن فیلترها</small>
+    </button>
+  </div>
+
+  <nz-collapse nzGhost>
+    <!-- Category -->
+    <nz-collapse-panel nzHeader="دسته‌بندی" [nzActive]="false">
+      <shop-category-filter />
+    </nz-collapse-panel>
+    <nz-divider></nz-divider>
+    <!-- Brand -->
+    <nz-collapse-panel nzHeader="برند" [nzActive]="false">
+      <shop-brand-filter />
+    </nz-collapse-panel>
+    <nz-divider></nz-divider>
+    <!-- Price -->
+
+    <nz-collapse-panel nzHeader="محدوده قیمت" [nzActive]="false">
+      <shop-price-filter />
+    </nz-collapse-panel>
+    <!-- بعداً -->
+    <nz-divider></nz-divider>
+    <!-- Sort -->
+    <nz-collapse-panel nzHeader="مرتب‌سازی" [nzActive]="true">
+      <shop-sort-filter />
+    </nz-collapse-panel>
+  </nz-collapse>
+</aside>

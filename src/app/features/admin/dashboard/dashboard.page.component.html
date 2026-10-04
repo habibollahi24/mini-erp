@@ -1,0 +1,16 @@
+<div class="welcome">
+  <h2>داشبورد ng24 😍</h2>
+  <span dir="ltr">{{ today }}</span>
+</div>
+<div nz-row [nzGutter]="16">
+  @for (card of statCards(); track $index) {
+    <div nz-col [nzSpan]="6">
+      <dashboard-stats-card [context]="card" />
+    </div>
+  }
+</div>
+
+<dashboard-sales-chart [salesChartData]="salesChartData()" />
+<dashboard-order-status-chart [orderStatusData]="orderStatusData()" />
+<dashboard-recent-order [recentOrders]="recentOrders()" />
+<dashboard-recent-activities [recentActivities]="recentActivities()" />

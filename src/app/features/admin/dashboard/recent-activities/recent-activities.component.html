@@ -1,0 +1,44 @@
+<h2>فعالیت های اخیر</h2>
+
+<nz-spin [nzSpinning]="false">
+  @if (activities().length === 0) {
+    <nz-empty nzNotFoundContent="فعالیتی وجود ندارد" />
+  }
+
+  @if (activities().length > 0) {
+    <div class="activity-list">
+      @for (activity of activities(); track activity.id) {
+        <ng-container
+          [ngTemplateOutlet]="activityTemplate"
+          [ngTemplateOutletContext]="{
+            $implicit: activity,
+          }"
+        />
+      }
+    </div>
+  }
+</nz-spin>
+
+<ng-template #activityTemplate let-activity>
+  @let meta = getActivityMeta(activity.type);
+
+  <div class="activity-item">
+    <div
+      class="activity-item__icon"
+      [style.color]="meta.color"
+      [style.background]="meta.background"
+    >
+      <nz-icon [nzType]="meta.icon" nzTheme="outline" />
+    </div>
+
+    <div class="activity-item__content">
+      <div class="activity-item__description">
+        {{ activity.description }}
+      </div>
+
+      <div class="activity-item__date">
+        {{ formatDate(activity.createdAt) }}
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+canvas {
+  font-family: Vazirmatn;
+}
+
+:root {
+  --color-surface: oklch(96.7% 0.003 264.542);
+  --color-on-serface: oklch(20.8% 0.042 265.755);
+}
+
+.dark-var {
+  --color-surface: oklch(20.8% 0.042 265.755);
+  --color-on-serface: oklch(96.7% 0.003 264.542);
+}
+@font-face {
+  font-family: "Vazirmatn ";
+  src: url("./assets/fonts/Vazirmatn-FD-ExtraLight.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn ";
+  src: url("./assets/fonts/Vazirmatn-FD-Light.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn ";
+  src: url("./assets/fonts/Vazirmatn-FD-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn ";
+  src: url("./assets/fonts/Vazirmatn-FD-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-FD-SemiBold.woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-FD-Bold.woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-FD-ExtraBold.woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}

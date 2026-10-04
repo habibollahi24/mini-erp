@@ -1,0 +1,23 @@
+<!-- <nz-select
+  [ngModel]="selectedBrand()"
+  (ngModelChange)="onBrandChange($event)"
+  nzAllowClear
+  nzShowSearch
+  nzPlaceHolder="انتخاب برند"
+>
+  @for (brand of brands(); track brand) {
+    <nz-option [nzValue]="brand.name" [nzLabel]="brand.name" />
+  }
+</nz-select> -->
+
+<nz-radio-group
+  [ngModel]="selectedBrand()"
+  (ngModelChange)="onBrandChange($event)"
+  nzName="radiogroup"
+>
+  @for (brand of brands(); track brand.id) {
+    <label nz-radio [nzValue]="brand.name">
+      {{ brand.name }}
+    </label>
+  }
+</nz-radio-group>

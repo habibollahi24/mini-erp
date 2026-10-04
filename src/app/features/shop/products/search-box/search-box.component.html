@@ -1,0 +1,8 @@
+<nz-input-search nzAllowClear>
+  <input
+    nz-input
+    [ngModel]="search()"
+    (ngModelChange)="onSearch($event)"
+    placeholder="جستجوی محصول..."
+  />
+</nz-input-search>

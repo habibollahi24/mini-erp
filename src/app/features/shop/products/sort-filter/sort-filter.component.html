@@ -1,0 +1,7 @@
+<nz-radio-group [ngModel]="sort()" (ngModelChange)="onSortChange($event)">
+  @for (option of options; track option.value) {
+    <label nz-radio [nzValue]="option.value" style="display: block">
+      {{ option.label }}
+    </label>
+  }
+</nz-radio-group>

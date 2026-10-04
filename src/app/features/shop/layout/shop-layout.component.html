@@ -1,0 +1,150 @@
+<header>
+  <div class="container">
+    <nav>
+      <div class="sidebar-logo">
+        <a href="https://ng.ant.design/" target="_blank">
+          <img src="/favicon.ico" alt="logo" />
+          <h1>ng24</h1>
+        </a>
+      </div>
+      <div style="display: flex; gap: 10px">
+        <nz-badge [nzCount]="store.totalItems()">
+          <button
+            nz-button
+            nzType="default"
+            [nzSize]="'small'"
+            nzShape="round"
+            (click)="open()"
+          >
+            <nz-icon
+              nzType="shopping-cart"
+              nzTheme="outline"
+              style="font-size: 1rem"
+            />
+          </button>
+        </nz-badge>
+        <nz-badge>
+          <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
+            <nz-icon nzType="lock" nzTheme="outline" />
+          </button>
+        </nz-badge>
+        <nz-badge>
+          <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
+            <nz-icon nzType="unlock" nzTheme="outline" />
+          </button>
+        </nz-badge>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="container">
+  <router-outlet></router-outlet>
+</section>
+
+<footer></footer>
+
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  [nzPlacement]="placement"
+  nzTitle="سبد خرید شما :)"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <div class="drawerContainer">
+      @if (store.items().length) {
+        <div class="cart-summary">
+          <div class="cart-summary__row">
+            <span>جمع کل:</span>
+            <strong>{{ store.subtotal() | number }} تومان</strong>
+          </div>
+
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            nzBlock
+            (click)="checkout()"
+          >
+            پرداخت
+          </button>
+        </div>
+      } @else {
+        <nz-empty nzNotFoundContent="سبد خرید خالی است" />
+      }
+      <div class="cart-items">
+        @for (item of store.items(); track item.id) {
+          <div class="cart-item">
+            <img
+              class="cart-item__image"
+              [src]="item.images[0]"
+              [alt]="item.name"
+            />
+
+            <div class="cart-item__content">
+              <div class="cart-item__header">
+                <h4>{{ item.name }}</h4>
+
+                <button
+                  nz-button
+                  nzType="text"
+                  nzSize="small"
+                  nzDanger
+                  (click)="removeFromCart(item.id)"
+                >
+                  <nz-icon nzType="delete" />
+                </button>
+              </div>
+
+              <div class="cart-item__info">
+                <span>{{ item.finalPrice | persianDigit }} تومان</span>
+                <span>× {{ item.quantity }}</span>
+              </div>
+
+              <div class="cart-item__footer">
+                <div class="quantity-control">
+                  @if (item.quantity === 1) {
+                    <button
+                      nz-button
+                      nzType="text"
+                      nzSize="small"
+                      nzDanger
+                      (click)="removeFromCart(item.id)"
+                    >
+                      <nz-icon nzType="delete" />
+                    </button>
+                  } @else {
+                    <button
+                      nz-button
+                      nzType="default"
+                      nzSize="small"
+                      (click)="decreaseQuantity(item.id)"
+                    >
+                      <nz-icon nzType="minus" />
+                    </button>
+                  }
+
+                  <span>{{ item.quantity }}</span>
+
+                  <button
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    (click)="increaseQuantity(item.id)"
+                  >
+                    <nz-icon nzType="plus" />
+                  </button>
+                </div>
+
+                <strong>
+                  {{ item.finalPrice * item.quantity | persianDigit }} تومان
+                </strong>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </ng-container>
+</nz-drawer>

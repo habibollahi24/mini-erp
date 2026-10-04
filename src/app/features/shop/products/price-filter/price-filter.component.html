@@ -1,0 +1,44 @@
+<div class="price-filter">
+  <!-- <nz-input-number
+    [(ngModel)]="minPrice"
+    [nzMin]="0"
+    nzPlaceHolder="حداقل قیمت"
+  /> -->
+  <!-- <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="minPrice"></nz-slider> -->
+
+  <!-- <nz-input-number
+    [(ngModel)]="maxPrice"
+    [nzMin]="0"
+    nzPlaceHolder="حداکثر قیمت"
+  /> -->
+  <!-- <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="maxPrice"></nz-slider> -->
+
+  <nz-slider
+    nzRange
+    nzMin="0"
+    nzMax="100000000"
+    [(ngModel)]="range"
+    [nzStep]="1000000"
+    [nzTipFormatter]="titleTemplate"
+  ></nz-slider>
+
+  <ng-template #titleTemplate let-value>
+    <span>تومان {{ priceToPersian(value) }}</span>
+  </ng-template>
+
+  <div style="display: flex; gap: 2px">
+    <button nz-button nzType="dashed" nzBlock (click)="apply()">
+      اعمال فیلتر
+    </button>
+    <button nz-button nzType="dashed" nzDanger>
+      <nz-icon nzType="close" />
+    </button>
+  </div>
+  <!-- <button nz-button nzType="link" nzBlock (click)="reset()">
+    حذف محدوده قیمت
+  </button> -->
+</div>
+
+<!-- (ngModelChange)="maxPrice.set($event)" 
+ 
+(ngModelChange)="minPrice.set($event)"  -->
