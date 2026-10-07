@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -8,6 +8,10 @@ import { NzDrawerModule, NzDrawerPlacement } from 'ng-zorro-antd/drawer';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { CommonModule } from '@angular/common';
 import { PersianDigitPipe } from '../../../core/persian-digit-pipe';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { AuthStore } from '../../../core/auth/auth.store';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-shop-layout',
@@ -20,12 +24,18 @@ import { PersianDigitPipe } from '../../../core/persian-digit-pipe';
     CommonModule,
     NzEmptyModule,
     PersianDigitPipe,
+    NzCardModule,
+    NzAvatarModule,
+    RouterLink,
+    NzTooltipModule,
   ],
   templateUrl: './shop-layout.component.html',
   styleUrl: './shop-layout.component.scss',
 })
 export class ShopLayoutComponent {
   readonly store = inject(CartStore);
+  readonly authStore = inject(AuthStore);
+
   visible = false;
   placement: NzDrawerPlacement = 'left';
   open(): void {
@@ -46,4 +56,8 @@ export class ShopLayoutComponent {
     this.store.increaseQuantity(id);
   }
   checkout() {}
+
+  logout() {
+    this.authStore.logout();
+  }
 }

@@ -14,6 +14,8 @@ import { SalesChartComponent } from './sales-chart/sales-chart.component';
 import { OrderStatusChartComponent } from './order-status-chart/order-status-chart.component';
 import { RecentOrderComponent } from './recent-order/recent-order.component';
 import { RecentActivitiesComponent } from './recent-activities/recent-activities.component';
+import { AuthService } from '../../auth/services/auth.service';
+import { AuthStore } from '../../../core/auth/auth.store';
 
 export interface StatCardData {
   title: string;
@@ -43,6 +45,7 @@ export interface StatCardData {
 })
 export class DashboardPageComponent {
   private readonly dashboardService = inject(DashboardService);
+  authStore = inject(AuthStore);
 
   readonly salesStats = toSignal(this.dashboardService.getSalesStats(), {
     initialValue: [],

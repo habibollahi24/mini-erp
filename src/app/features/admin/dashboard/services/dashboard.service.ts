@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../../../../environment/environment';
 
 import { Activity, Order, SalesStat } from '../dashboard.model';
 
@@ -9,7 +10,7 @@ import { Activity, Order, SalesStat } from '../dashboard.model';
 export class DashboardService {
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:3000';
+  apiUrl = environment.apiUrl;
 
   getSalesStats() {
     return this.http.get<SalesStat[]>(`${this.apiUrl}/salesStats`);

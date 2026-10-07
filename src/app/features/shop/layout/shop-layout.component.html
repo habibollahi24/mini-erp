@@ -23,17 +23,44 @@
             />
           </button>
         </nz-badge>
-        <nz-badge>
-          <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
-            <nz-icon nzType="lock" nzTheme="outline" />
-          </button>
-        </nz-badge>
-        <nz-badge>
-          <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
-            <nz-icon nzType="unlock" nzTheme="outline" />
-          </button>
-        </nz-badge>
+
+        <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
+          <nz-icon nzType="lock" nzTheme="outline" />
+        </button>
+
+        <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
+          <nz-icon nzType="unlock" nzTheme="outline" />
+        </button>
+
+        <button
+          nz-button
+          nz-tooltip=" خروج از اپ"
+          nzType="default"
+          [nzSize]="'small'"
+          nzShape="round"
+          (click)="logout()"
+        >
+          <nz-icon nzType="logout" nzTheme="outline" />
+        </button>
       </div>
+
+      @if (authStore.isAuthenticated()) {
+        <div class="avatar">
+          <div>{{ authStore.user()?.name }}</div>
+          <nz-avatar [nzText]="authStore.user()?.name?.[0]"></nz-avatar>
+        </div>
+      } @else {
+        <button
+          nz-button
+          nz-tooltip="ورود یا ثبت نام"
+          nzType="default"
+          [nzSize]="'small'"
+          nzShape="round"
+          routerLink="/auth"
+        >
+          <nz-icon nzType="login" nzTheme="outline" />
+        </button>
+      }
     </nav>
   </div>
 </header>
@@ -53,28 +80,8 @@
 >
   <ng-container *nzDrawerContent>
     <div class="drawerContainer">
-      @if (store.items().length) {
-        <div class="cart-summary">
-          <div class="cart-summary__row">
-            <span>جمع کل:</span>
-            <strong>{{ store.subtotal() | number }} تومان</strong>
-          </div>
-
-          <button
-            nz-button
-            nzType="primary"
-            nzSize="large"
-            nzBlock
-            (click)="checkout()"
-          >
-            پرداخت
-          </button>
-        </div>
-      } @else {
-        <nz-empty nzNotFoundContent="سبد خرید خالی است" />
-      }
       <div class="cart-items">
-        @for (item of store.items(); track item.id) {
+        @for (item of store.items(); track $index) {
           <div class="cart-item">
             <img
               class="cart-item__image"
@@ -98,7 +105,10 @@
               </div>
 
               <div class="cart-item__info">
-                <span>{{ item.finalPrice | persianDigit }} تومان</span>
+                <span
+                  >{{ item.finalPrice | persianDigit }}
+                  <span class="toman">توما</span></span
+                >
                 <span>× {{ item.quantity }}</span>
               </div>
 
@@ -138,13 +148,37 @@
                 </div>
 
                 <strong>
-                  {{ item.finalPrice * item.quantity | persianDigit }} تومان
+                  {{ item.finalPrice * item.quantity | persianDigit }}
+                  <span class="toman">توما</span>
                 </strong>
               </div>
             </div>
           </div>
         }
       </div>
+      @if (store.items().length) {
+        <nz-card class="cart-summary">
+          <div class="cart-summary__row">
+            <span>جمع کل:</span>
+            <strong
+              >{{ store.subtotal() | number }}
+              <span class="toman">توما</span></strong
+            >
+          </div>
+
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            nzBlock
+            (click)="checkout()"
+          >
+            پرداخت
+          </button>
+        </nz-card>
+      } @else {
+        <nz-empty nzNotFoundContent="سبد خرید خالی است" />
+      }
     </div>
   </ng-container>
 </nz-drawer>

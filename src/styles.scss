@@ -6,6 +6,13 @@ canvas {
 :root {
   --color-surface: oklch(96.7% 0.003 264.542);
   --color-on-serface: oklch(20.8% 0.042 265.755);
+  --best-shadow:
+    rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+    rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+    rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+    rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+    rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
+    rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 }
 
 .dark-var {
@@ -67,4 +74,17 @@ canvas {
 .container {
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.toman {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.toman::after {
+  content: "ن";
+  position: absolute;
+  left: 3%;
+  // top: 0;
+  bottom: 50%;
 }

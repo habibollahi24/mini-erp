@@ -15,8 +15,7 @@ export class ProductsPaginationComponent {
   private readonly route = inject(ActivatedRoute);
 
   totalItems = input.required<number>();
-
-  readonly pageSize = 4;
+  pageSize = input.required<number>();
 
   readonly currentPage = toSignal(
     this.route.queryParamMap.pipe(

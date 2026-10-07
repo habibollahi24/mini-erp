@@ -13,7 +13,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AuthStore } from '../../../core/auth/auth.store';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [
     ReactiveFormsModule,
     NzButtonModule,
@@ -22,30 +22,36 @@ import { AuthStore } from '../../../core/auth/auth.store';
     NzInputModule,
     NzIconModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class LoginComponent {
+export class RegisterComponent {
   private fb = inject(NonNullableFormBuilder);
-  // private readonly authService = inject(AuthService);
   readonly authStore = inject(AuthStore);
 
   form = this.fb.group({
+    firstName: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    lastName: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', [
       Validators.required,
       Validators.minLength(6),
     ]),
-    remember: this.fb.control(true),
   });
 
   submitForm(): void {
     if (this.form.valid) {
       const credentials = {
-        email: this.form.controls.email.value,
-        password: this.form.controls.password.value,
+        ...this.form.getRawValue(),
       };
-      this.authStore.login(credentials);
+      console.log(credentials);
+      this.authStore.register(credentials);
     } else {
       Object.values(this.form.controls).forEach((control) => {
         if (control.invalid) {

@@ -9,7 +9,6 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzImageModule } from 'ng-zorro-antd/image';
-import { PersianDigitPipe } from '../../../../core/persian-digit-pipe';
 import { Product } from '../../shop.model';
 import { CartStore } from '../../../../core/store/cart/cart.store';
 
@@ -25,7 +24,6 @@ import { CartStore } from '../../../../core/store/cart/cart.store';
     NzImageModule,
     FormsModule,
     CommonModule,
-    PersianDigitPipe,
   ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.less',

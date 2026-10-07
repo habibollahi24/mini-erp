@@ -33,7 +33,7 @@ export class ProductListComponent {
   readonly products = signal<Product[]>([]);
   readonly productsLoading = signal(false);
   readonly totalItems = signal(0);
-  readonly pageSize = 4;
+  readonly pageSize = 6;
 
   ngOnInit(): void {
     this.route.queryParamMap
@@ -54,6 +54,8 @@ export class ProductListComponent {
           this.products.set(response.body ?? []);
 
           const total = response.headers.get('X-Total-Count');
+
+          console.log('totalllll', total);
 
           this.totalItems.set(total ? Number(total) : 0);
 

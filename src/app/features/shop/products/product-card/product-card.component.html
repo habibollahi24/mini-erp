@@ -52,7 +52,7 @@
     </p>
 
     <!-- Rating -->
-    <div class="rating-row">
+    <!-- <div class="rating-row">
       <nz-rate
         [ngModel]="product().rating"
         [nzDisabled]="true"
@@ -64,7 +64,7 @@
       </span>
 
       <span class="review-count"> ({{ product().reviewCount }} نظر) </span>
-    </div>
+    </div> -->
 
     <!-- Stock -->
     <!-- <div class="stock-section">
@@ -92,8 +92,8 @@
         } -->
         <div class="price-label">قیمت حراجی</div>
         <strong class="final-price">
-          {{ product().finalPrice | persianDigit }}
-          <small>تومان</small>
+          {{ product().finalPrice | number }}
+          <span class="toman">توما</span>
         </strong>
       </div>
 
@@ -120,9 +120,5 @@
         افزودن به سفارش
       </button>
     }
-
-    <button nz-button nzType="default" nzShape="circle">
-      <nz-icon nzType="more"></nz-icon>
-    </button>
   </div>
 </nz-card>

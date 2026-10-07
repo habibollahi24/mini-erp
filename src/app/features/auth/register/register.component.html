@@ -1,0 +1,111 @@
+<h2>ثبت نام</h2>
+
+<!-- <pre>user:{{ authStore.user()?.email }}</pre>
+<pre>loading:{{ authStore.loading() }}</pre>
+<pre>error:{{ authStore.error() }}</pre>
+<pre>isAuthenticated:{{ authStore.isAuthenticated() }}</pre>
+<pre>authBootstrapFlashPassed:{{ authStore.authBootstrapFlashPassed() }}</pre> -->
+
+<form
+  nz-form
+  [formGroup]="form"
+  class="register-form"
+  (ngSubmit)="submitForm()"
+>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="firstNameErrorTpl">
+      <nz-input-wrapper>
+        <nz-icon nzInputSuffix nzType="user" style="color: #c8c7c7" />
+        <input
+          type="text"
+          nzSize="large"
+          nz-input
+          formControlName="firstName"
+          placeholder=" نام "
+        />
+      </nz-input-wrapper>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="lastNameErrorTpl">
+      <nz-input-wrapper>
+        <nz-icon nzInputSuffix nzType="user" style="color: #c8c7c7" />
+        <input
+          type="text"
+          nzSize="large"
+          nz-input
+          formControlName="lastName"
+          placeholder=" نام خانوادگی "
+        />
+      </nz-input-wrapper>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="emailErrorTpl">
+      <nz-input-wrapper>
+        <nz-icon nzInputSuffix nzType="mail" style="color: #c8c7c7" />
+        <input
+          type="text"
+          nzSize="large"
+          nz-input
+          formControlName="email"
+          placeholder="ایمیل کاربری"
+        />
+      </nz-input-wrapper>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="passwordErrorTpl">
+      <nz-input-password>
+        <input
+          nzSize="large"
+          nz-input
+          formControlName="password"
+          placeholder="رمز عبور"
+        />
+      </nz-input-password>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button
+    nz-button
+    nzSize="large"
+    class="register-form-button register-form-margin"
+    [nzType]="'primary'"
+  >
+    ثبت نام
+  </button>
+</form>
+
+<ng-template #firstNameErrorTpl let-control>
+  @if (control.errors?.["required"]) {
+    لطفا نام خود را وارد کنید
+  }
+  @if (control.errors?.["minlength"]) {
+    حداقل 2 کاراکتر نیاز است
+  }
+</ng-template>
+<ng-template #lastNameErrorTpl let-control>
+  @if (control.errors?.["required"]) {
+    لطفا نام خانوادگی را وارد کنید
+  }
+  @if (control.errors?.["minlength"]) {
+    حداقل 2 کاراکتر نیاز است
+  }
+</ng-template>
+<ng-template #emailErrorTpl let-control>
+  @if (control.errors?.["required"]) {
+    لطفا ایمیل خود را وارد کنید
+  }
+  @if (control.errors?.["email"]) {
+    لطفا ایمیل معتبر وارد کنید
+  }
+</ng-template>
+<ng-template #passwordErrorTpl let-control>
+  @if (control.errors?.["required"]) {
+    لطفا رمز عبور را وارد کنید
+  }
+  @if (control.errors?.["minlength"]) {
+    حداقل 6 کاراکتر
+  }
+</ng-template>

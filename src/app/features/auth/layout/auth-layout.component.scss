@@ -1,6 +1,44 @@
-.form-container {
+:host {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 85vh;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // box-shadow: var(--best-shadow);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.316) 0px 30px 90px;
+}
+.form-image-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  // filter: brightness(50%);
+  // filter: saturate(100%);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.form-image-container::after {
+  content: "";
+  background-color: #4f39f66d;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.form-outlet-container {
+  padding: 2rem;
+  width: 50%;
+  flex: 1;
 }

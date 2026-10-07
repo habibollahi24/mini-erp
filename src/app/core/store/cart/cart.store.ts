@@ -62,26 +62,25 @@ export const CartStore = signalStore(
       return patchState(store, { items: UpdatedCart });
     },
     increaseQuantity(id: number) {
-      const cartItems = store.items();
-
-      const findedProductCart = cartItems.find((c) => c.id === id);
-
-      if (!findedProductCart) return;
-
-      findedProductCart.quantity++;
-
-      patchState(store, { items: store.items() });
+      patchState(store, {
+        items: store
+          .items()
+          .map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+          ),
+      });
     },
+
     decreaseQuantity(id: number) {
-      const cartItems = store.items();
-
-      const findedProductCart = cartItems.find((c) => c.id === id);
-
-      if (!findedProductCart) return;
-
-      findedProductCart.quantity--;
-
-      patchState(store, { items: store.items() });
+      patchState(store, {
+        items: store
+          .items()
+          .map((item) =>
+            item.id === id
+              ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+              : item,
+          ),
+      });
     },
     removeFromCart(id: number) {
       const cartItems = store.items();
@@ -93,7 +92,6 @@ export const CartStore = signalStore(
       patchState(store, { items: filteredProductCart });
     },
   })),
-
   withHooks({
     onInit(store) {
       effect(() => {

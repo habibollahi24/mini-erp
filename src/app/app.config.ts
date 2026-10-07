@@ -1,13 +1,19 @@
 import {
   ApplicationConfig,
+  inject,
   LOCALE_ID,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { icons } from './icons-provider';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { fa_IR, provideNzI18n } from 'ng-zorro-antd/i18n';
@@ -15,6 +21,8 @@ import { registerLocaleData } from '@angular/common';
 import fa from '@angular/common/locales/fa';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
+import { AuthStore } from './core/auth/auth.store';
+import { authInterceptor } from './core/auth/auth.interceptor';
 
 registerLocaleData(fa);
 
@@ -26,10 +34,14 @@ const ngZorroConfig: NzConfig = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => {
+      const authStore = inject(AuthStore);
+      return authStore.initialize$();
+    }),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
 
     provideNzIcons(icons),
     provideNzI18n(fa_IR),

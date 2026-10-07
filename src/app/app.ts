@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
     NzButtonModule,
     NzFloatButtonModule,
     CommonModule,
+    RouterLinkWithHref,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

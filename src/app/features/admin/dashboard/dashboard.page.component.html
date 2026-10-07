@@ -1,5 +1,7 @@
+@let user = authStore.user();
+
 <div class="welcome">
-  <h2>داشبورد ng24 😍</h2>
+  <h2>{{ user?.firstName }} {{ user?.lastName }} {{ user?.role }}</h2>
   <span dir="ltr">{{ today }}</span>
 </div>
 <div nz-row [nzGutter]="16">

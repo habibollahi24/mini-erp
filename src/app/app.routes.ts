@@ -4,6 +4,11 @@ import { AuthLayoutComponent } from './features/auth/layout/auth-layout.componen
 import { ShopLayoutComponent } from './features/shop/layout/shop-layout.component';
 import { AdminLayoutComponent } from './features/admin/layout/admin-layout.component';
 
+import { AUTH_ROUTES } from './features/auth/auth.routes';
+import { authGuard } from './core/auth/auth.guard';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { roleGuard } from './core/auth/role.guard';
+
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'shop' },
   {
@@ -14,14 +19,21 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [authGuard, roleGuard],
+    data: {
+      roles: ['admin', 'manager'],
+    },
     component: AdminLayoutComponent,
     loadChildren: () =>
       import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
   },
   {
-    path: 'login',
+    path: 'auth',
     component: AuthLayoutComponent,
-    loadChildren: () =>
-      import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+    children: AUTH_ROUTES,
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
   },
 ];

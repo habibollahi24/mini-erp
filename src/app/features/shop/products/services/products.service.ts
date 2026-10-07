@@ -3,6 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { PaginatedResponse, Product, ProductQuery } from '../../shop.model';
 import { map } from 'rxjs';
 
+import { environment } from '../../../../../../environment/environment';
+
 interface QueryState {
   page: number;
   limit: number;
@@ -16,7 +18,9 @@ interface QueryState {
 export class ProductsService {
   private readonly http = inject(HttpClient);
 
-  private readonly productsUrl = 'http://localhost:3000/products';
+  apiUrl = environment.apiUrl;
+
+  private readonly productsUrl = `${this.apiUrl}/products`;
 
   getProducts(query: ProductQuery) {
     const { page, limit, categoryId, search, brand, sort, maxPrice, minPrice } =
@@ -53,20 +57,5 @@ export class ProductsService {
       params,
       observe: 'response',
     });
-  }
-  getBrands(categoryId?: number) {
-    let params = new HttpParams();
-
-    if (categoryId !== undefined) {
-      params = params.set('categoryId', categoryId);
-    }
-
-    return this.http
-      .get<Product[]>(this.productsUrl, { params })
-      .pipe(
-        map((products) => [
-          ...new Set(products.map((product) => product.brand)),
-        ]),
-      );
   }
 }

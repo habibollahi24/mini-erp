@@ -1,3 +1,5 @@
+@let user = authStore.user();
+
 <nz-layout class="app-layout">
   <nz-sider
     class="menu-sidebar"
@@ -6,41 +8,52 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
   >
-    <div style="position: sticky; top: 0">
-      <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
-          <img src="/favicon.ico" alt="logo" />
-          <h1>ng24</h1>
-        </a>
-      </div>
+    <div class="side-panel">
+      <div class="sidebar-list">
+        <div class="sidebar-logo">
+          <a href="https://ng.ant.design/" target="_blank">
+            <img src="/favicon.ico" alt="logo" />
+            <h1>ng24</h1>
+          </a>
+        </div>
 
-      <ul
-        nz-menu
-        nzMode="inline"
-        [nzInlineCollapsed]="isCollapsed"
-        nzTheme="light"
-      >
-        <li nz-submenu nzOpen nzTitle="داشبورد" nzIcon="dashboard">
-          <ul dir="rtl">
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">Welcome</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Monitor</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="فرم ها" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+        <ul
+          nz-menu
+          nzMode="inline"
+          [nzInlineCollapsed]="isCollapsed"
+          nzTheme="light"
+        >
+          <li nz-submenu nzOpen nzTitle="داشبورد" nzIcon="dashboard">
+            <ul dir="rtl">
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/welcome">Welcome</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a>Monitor</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a>Workplace</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzOpen nzTitle="فرم ها" nzIcon="form">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a>Basic Form</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="avtar-card">
+        <div class="sidebar-avatar">
+          <img [src]="user?.avatar" />
+          <div class="info">
+            <p>{{ user?.name }}</p>
+            <p>{{ user?.email }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </nz-sider>
 
