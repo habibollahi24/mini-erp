@@ -5,7 +5,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../services/products.service';
 import { map, switchMap, tap } from 'rxjs';
 import { mapParamsToProductQuery } from '../../utils/product-query.mapper';
 import { Product } from '../../shop.model';
@@ -42,7 +42,8 @@ export class ProductListComponent {
           return mapParamsToProductQuery(params, this.pageSize);
         }),
 
-        tap(() => {
+        tap((params) => {
+          console.log('ggggggggggg', params);
           this.productsLoading.set(true);
           this.error.set(false);
         }),
@@ -54,8 +55,6 @@ export class ProductListComponent {
           this.products.set(response.body ?? []);
 
           const total = response.headers.get('X-Total-Count');
-
-          console.log('totalllll', total);
 
           this.totalItems.set(total ? Number(total) : 0);
 

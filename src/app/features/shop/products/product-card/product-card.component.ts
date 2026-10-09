@@ -10,7 +10,9 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { Product } from '../../shop.model';
-import { CartStore } from '../../../../core/store/cart/cart.store';
+import { CartStore } from '../../../../store/cart.store';
+import { WishlistStore } from '../../../../store/wishlist.store';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'shop-product-card',
@@ -24,11 +26,13 @@ import { CartStore } from '../../../../core/store/cart/cart.store';
     NzImageModule,
     FormsModule,
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.less',
 })
 export class ProductCardComponent {
   readonly store = inject(CartStore);
+  readonly wishlistStore = inject(WishlistStore);
   product = input.required<Product>();
 }

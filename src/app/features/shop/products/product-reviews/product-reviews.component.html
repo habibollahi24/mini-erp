@@ -1,0 +1,66 @@
+@let reviewList = reviews.value();
+
+<nz-card class="reviews-card">
+  <div class="reviews-header">
+    <div>
+      <h2>نظرات مشتریان</h2>
+
+      <span>
+        {{ reviewList?.length ?? 0 }}
+        نظر
+      </span>
+    </div>
+
+    @if (product()?.rating) {
+      <div class="overall-rating">
+        <strong>
+          {{ product()?.rating }}
+        </strong>
+
+        <nz-rate [ngModel]="product()?.rating" nzDisabled nzAllowHalf />
+      </div>
+    }
+  </div>
+
+  @if (reviews.isLoading()) {
+    <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 3 }" />
+
+    <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 3 }" />
+  } @else if (reviewList) {
+    @for (review of reviewList; track review.id) {
+      <div class="review-card">
+        <div class="review-avatar">
+          <nz-avatar
+            [nzSize]="48"
+            [nzSrc]="review.customer.avatar"
+            [nzText]="review.customer.firstName.charAt(0)"
+          />
+        </div>
+        <div class="review-content">
+          <div class="customer-info">
+            <strong>
+              {{ review.customer.firstName }}
+              {{ review.customer.lastName }}
+            </strong>
+
+            <span>
+              {{ review.createdAt }}
+            </span>
+          </div>
+
+          <div class="review-rating">
+            <nz-rate [ngModel]="review.rating" nzDisabled />
+          </div>
+
+          <h3>
+            {{ review.title }}
+          </h3>
+
+          <p nz-typography nzType="secondary">
+            {{ review.comment }}
+          </p>
+        </div>
+      </div>
+    }
+  }
+</nz-card>

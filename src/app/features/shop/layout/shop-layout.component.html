@@ -8,7 +8,7 @@
         </a>
       </div>
       <div style="display: flex; gap: 10px">
-        <nz-badge [nzCount]="store.totalItems()">
+        <nz-badge [nzCount]="cartStore.totalItems()">
           <button
             nz-button
             nzType="default"
@@ -21,6 +21,11 @@
               nzTheme="outline"
               style="font-size: 1rem"
             />
+          </button>
+        </nz-badge>
+        <nz-badge [nzCount]="wishlistStore.count()">
+          <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
+            <nz-icon nzType="heart" nzTheme="outline" style="font-size: 1rem" />
           </button>
         </nz-badge>
 
@@ -45,7 +50,7 @@
       </div>
 
       @if (authStore.isAuthenticated()) {
-        <div class="avatar">
+        <div class="avatar" routerLink="profile">
           <div>{{ authStore.user()?.name }}</div>
           <nz-avatar [nzText]="authStore.user()?.name?.[0]"></nz-avatar>
         </div>
@@ -69,8 +74,6 @@
   <router-outlet></router-outlet>
 </section>
 
-<footer></footer>
-
 <nz-drawer
   [nzClosable]="false"
   [nzVisible]="visible"
@@ -81,7 +84,7 @@
   <ng-container *nzDrawerContent>
     <div class="drawerContainer">
       <div class="cart-items">
-        @for (item of store.items(); track $index) {
+        @for (item of cartStore.items(); track $index) {
           <div class="cart-item">
             <img
               class="cart-item__image"
@@ -156,12 +159,12 @@
           </div>
         }
       </div>
-      @if (store.items().length) {
+      @if (cartStore.items().length) {
         <nz-card class="cart-summary">
           <div class="cart-summary__row">
             <span>جمع کل:</span>
             <strong
-              >{{ store.subtotal() | number }}
+              >{{ cartStore.subtotal() | number }}
               <span class="toman">توما</span></strong
             >
           </div>

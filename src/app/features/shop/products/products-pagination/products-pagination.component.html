@@ -1,5 +1,6 @@
 <nz-pagination
-  [nzPageIndex]="currentPage()"
+  [nzHideOnSinglePage]="true"
+  [nzPageIndex]="pp()"
   [nzPageSize]="pageSize()"
   [nzTotal]="totalItems()"
   (nzPageIndexChange)="onPageChange($event)"

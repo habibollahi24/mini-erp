@@ -72,11 +72,11 @@
 <ng-template #paymentTemplate let-order>
   <div class="payment">
     <nz-tag [nzColor]="paymentStatusColors[order.paymentStatus]">
-      {{ paymentStatusLabels[order.paymentStatus] ?? order.paymentStatus }}
+      {{ paymentStatusLabels[order.paymentStatus] }}
     </nz-tag>
 
     <span class="payment__method">
-      {{ paymentMethodLabels[order.paymentMethod] ?? order.paymentMethod }}
+      {{ paymentMethodLabels[order.paymentMethod] }}
     </span>
   </div>
 </ng-template>

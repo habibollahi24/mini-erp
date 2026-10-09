@@ -1,0 +1,38 @@
+<div class="profile-page">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item>
+      <a routerLink="/shop">
+        <nz-icon nzType="home" />
+        فروشگاه
+      </a>
+    </nz-breadcrumb-item>
+
+    <nz-breadcrumb-item> پروفایل </nz-breadcrumb-item>
+  </nz-breadcrumb>
+
+  <nz-tabs nzTabPosition="right" nzSize="small">
+    <nz-tab [nzTitle]="infoTemplate">
+      <ng-template #infoTemplate>
+        <nz-icon nzType="user" />
+        حساب کاربری من
+      </ng-template>
+      <shop-profile-info></shop-profile-info>
+    </nz-tab>
+    <nz-tab [nzTitle]="orderTemplate">
+      <ng-template #orderTemplate>
+        <nz-icon nzType="shopping" nzTheme="outline" />
+
+        سفارش های من
+      </ng-template>
+      <shop-profile-orders></shop-profile-orders>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="FavoriteTemplate">
+      <ng-template #FavoriteTemplate>
+        <nz-icon nzType="heart" />
+        علاقه مندی های من
+      </ng-template>
+      <shop-profile-wishlist></shop-profile-wishlist>
+    </nz-tab>
+  </nz-tabs>
+</div>

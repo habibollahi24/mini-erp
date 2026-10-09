@@ -11,6 +11,7 @@
       [src]="product().images[0]"
       [alt]="product().name"
       class="product-image"
+      [routerLink]="['product', product().id]"
     />
 
     <div class="product-badges">
@@ -26,10 +27,24 @@
       }
     </div>
 
-    <button nz-button nzType="default" nzShape="circle" class="favorite-btn">
-      <nz-icon nzType="heart" nzTheme="outline"></nz-icon>
+    <button
+      (click)="wishlistStore.add(product())"
+      nz-button
+      nzType="text"
+      nzShape="circle"
+      class="favorite-btn"
+    >
+      <nz-icon
+        nzType="heart"
+        [nzTheme]="
+          wishlistStore.isFavorite()(product().id) ? 'fill' : 'outline'
+        "
+        style="color: rgb(239, 57, 57)"
+      />
     </button>
   </div>
+
+  <!-- [nzTheme]=" wishlistStore.isFavorite()(product().id) ? 'fill' : 'outline'" -->
 
   <!-- Content -->
   <div class="product-content">
@@ -43,11 +58,14 @@
     </div>
 
     <!-- Title -->
-    <h3 class="product-title">
+    <h3 class="product-title" [routerLink]="['product', product().id]">
       {{ product().name }}
     </h3>
 
-    <p class="product-short-description">
+    <p
+      class="product-short-description"
+      [routerLink]="['product', product().id]"
+    >
       {{ product().shortDescription }}
     </p>
 

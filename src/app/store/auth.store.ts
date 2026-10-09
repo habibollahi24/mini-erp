@@ -18,15 +18,14 @@ import {
   tap,
 } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-
-import { AuthService } from '../../features/auth/services/auth.service';
 import {
   AuthResponse,
   LoginDto,
   MeResponse,
   RegisterDto,
   User,
-} from '../../features/auth/auth.model';
+} from '../features/auth/auth.model';
+import { AuthService } from '../features/auth/services/auth.service';
 
 interface AuthState {
   user: User | null;

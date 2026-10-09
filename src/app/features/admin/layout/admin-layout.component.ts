@@ -6,8 +6,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { BidiModule } from '@angular/cdk/bidi';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { AuthStore } from '../../../core/auth/auth.store';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { AuthStore } from '../../../store/auth.store';
 
 @Component({
   selector: 'app-admin-layout',

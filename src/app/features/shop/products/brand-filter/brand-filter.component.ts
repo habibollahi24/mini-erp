@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../services/products.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule } from '@angular/forms';
-import { BrandsService } from '../services/brands.service';
+import { BrandsService } from '../../services/brands.service';
 import { Brand } from '../../shop.model';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 

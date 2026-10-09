@@ -1,6 +1,6 @@
 import { CanActivateFn, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { AuthStore } from './auth.store';
+import { AuthStore } from '../../store/auth.store';
 
 export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   const authStore = inject(AuthStore);

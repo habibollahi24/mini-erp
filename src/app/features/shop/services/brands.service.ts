@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Brand } from '../../shop.model';
+import { Brand } from '../shop.model';
 
-import { environment } from '../../../../../../environment/environment';
+import { environment } from '../../../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',

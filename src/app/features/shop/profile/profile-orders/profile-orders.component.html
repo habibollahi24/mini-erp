@@ -1,0 +1,90 @@
+@let orderList = orders.value();
+
+<section class="orders">
+  <div class="section-header">
+    <h2 class="title">سفارش‌های من</h2>
+
+    @if (orders.value(); as orderList) {
+      <nz-tag> {{ orderList.length }} سفارش </nz-tag>
+    }
+  </div>
+
+  @if (orders.isLoading()) {
+    @for (item of [1, 2, 3]; track item) {
+      <nz-card>
+        <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 3 }" />
+      </nz-card>
+    }
+  } @else if (orderList) {
+    @if (orderList.length === 0) {
+      <nz-empty nzNotFoundContent="هنوز سفارشی ثبت نکرده‌اید" />
+    } @else {
+      <div class="orders-list">
+        @for (order of orderList; track order.id) {
+          <div class="order-card">
+            <div class="order-header">
+              <div class="order-number">
+                <span>سفارش</span>
+
+                <strong> #{{ order.id }} </strong>
+              </div>
+
+              <nz-tag [nzColor]="getOrderStatusColor(order.status)">
+                {{ getOrderStatusLabel(order.status) }}
+              </nz-tag>
+            </div>
+
+            <div class="order-info">
+              <div>
+                <span>تاریخ سفارش</span>
+
+                <strong>
+                  {{ order.createdAt }}
+                </strong>
+              </div>
+
+              <div>
+                <span>تعداد کالا</span>
+
+                <strong>
+                  {{ order.itemsCount }}
+                </strong>
+              </div>
+
+              <div>
+                <span>مبلغ کل</span>
+
+                <strong>
+                  {{ order.total | number: "1.0-0" : "fa-IR" }}
+                  تومان
+                </strong>
+              </div>
+            </div>
+
+            <div class="order-footer">
+              <div class="payment">
+                <nz-tag
+                  [nzColor]="
+                    order.paymentStatus === 'paid' ? 'success' : 'warning'
+                  "
+                >
+                  {{
+                    order.paymentStatus === "paid"
+                      ? "پرداخت شده"
+                      : "در انتظار پرداخت"
+                  }}
+                </nz-tag>
+              </div>
+
+              <button nz-button nzType="text">
+                مشاهده جزئیات
+                <nz-icon nzType="arrow-left" />
+              </button>
+            </div>
+            <nz-divider />
+          </div>
+        }
+      </div>
+    }
+  }
+</section>

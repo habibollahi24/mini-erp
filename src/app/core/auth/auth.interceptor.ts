@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 
-import { AuthStore } from './auth.store';
 import {
   BehaviorSubject,
   catchError,
@@ -12,6 +11,7 @@ import {
   throwError,
 } from 'rxjs';
 import { AuthService } from '../../features/auth/services/auth.service';
+import { AuthStore } from '../../store/auth.store';
 
 let refreshInProgress = false;
 const refreshTokenSubject = new BehaviorSubject<string | null>(null);

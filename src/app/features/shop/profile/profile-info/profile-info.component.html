@@ -1,0 +1,74 @@
+<div class="page-header">
+  <div>
+    <p>مدیریت اطلاعات حساب کاربری</p>
+  </div>
+</div>
+
+@if (user(); as currentUser) {
+  <nz-card class="profile-card">
+    <div class="profile-header">
+      <nz-avatar
+        [nzSize]="88"
+        [nzSrc]="currentUser.avatar"
+        [nzText]="currentUser.firstName.charAt(0)"
+      />
+
+      <div class="profile-summary">
+        <h2>
+          {{ currentUser.firstName }}
+          {{ currentUser.lastName }}
+        </h2>
+
+        <span>
+          {{ currentUser.email }}
+        </span>
+
+        <nz-tag nzColor="blue"> مشتری </nz-tag>
+      </div>
+    </div>
+  </nz-card>
+
+  <nz-card nzTitle="اطلاعات شخصی" class="info-card">
+    <nz-descriptions
+      [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }"
+      nzBordered
+    >
+      <nz-descriptions-item nzTitle="نام">
+        {{ currentUser.firstName }}
+      </nz-descriptions-item>
+
+      <nz-descriptions-item nzTitle="نام خانوادگی">
+        {{ currentUser.lastName }}
+      </nz-descriptions-item>
+
+      <nz-descriptions-item nzTitle="ایمیل">
+        {{ currentUser.email }}
+      </nz-descriptions-item>
+
+      <nz-descriptions-item nzTitle="شماره موبایل">
+        {{ currentUser.phone || "ثبت نشده" }}
+      </nz-descriptions-item>
+
+      <nz-descriptions-item nzTitle="وضعیت حساب">
+        <nz-tag nzColor="success"> فعال </nz-tag>
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
+  <div class="actions">
+    <button nz-button nzType="primary">
+      <nz-icon nzType="edit" />
+      ویرایش اطلاعات
+    </button>
+  </div>
+
+  <nz-card nzTitle="امنیت حساب" class="security-card">
+    <div class="security-row">
+      <div>
+        <strong>رمز عبور</strong>
+        <p>برای امنیت بیشتر، رمز عبور خود را مدیریت کنید.</p>
+      </div>
+
+      <button nz-button>تغییر رمز عبور</button>
+    </div>
+  </nz-card>
+}

@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { CategoryService } from '../services/category.service';
+import { CategoryService } from '../../services/category.service';
 import { Category } from '../../shop.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzRadioModule } from 'ng-zorro-antd/radio';

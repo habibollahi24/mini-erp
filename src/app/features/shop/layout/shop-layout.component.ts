@@ -1,17 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { CartStore } from '../../../core/store/cart/cart.store';
+import { CartStore } from '../../../store/cart.store';
 import { NzDrawerModule, NzDrawerPlacement } from 'ng-zorro-antd/drawer';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { CommonModule } from '@angular/common';
 import { PersianDigitPipe } from '../../../core/persian-digit-pipe';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { AuthStore } from '../../../core/auth/auth.store';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
+import { WishlistStore } from '../../../store/wishlist.store';
+import { AuthStore } from '../../../store/auth.store';
 
 @Component({
   selector: 'app-shop-layout',
@@ -33,8 +34,15 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
   styleUrl: './shop-layout.component.scss',
 })
 export class ShopLayoutComponent {
-  readonly store = inject(CartStore);
+  readonly cartStore = inject(CartStore);
   readonly authStore = inject(AuthStore);
+  readonly wishlistStore = inject(WishlistStore);
+
+  constructor() {
+    effect(() => {
+      console.log(this.wishlistStore.favariteProducts());
+    });
+  }
 
   visible = false;
   placement: NzDrawerPlacement = 'left';
@@ -47,13 +55,13 @@ export class ShopLayoutComponent {
   }
 
   removeFromCart(id: number) {
-    this.store.removeFromCart(id);
+    this.cartStore.removeFromCart(id);
   }
   decreaseQuantity(id: number) {
-    this.store.decreaseQuantity(id);
+    this.cartStore.decreaseQuantity(id);
   }
   increaseQuantity(id: number) {
-    this.store.increaseQuantity(id);
+    this.cartStore.increaseQuantity(id);
   }
   checkout() {}
 

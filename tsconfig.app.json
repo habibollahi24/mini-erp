@@ -3,6 +3,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "paths": {
+      "@admin": ["./src/app/features/admin"],
+      "@auth": ["./src/app/features/auth"],
+      "@shop": ["./src/app/features/shop"],
+      "@core": ["./src/app/core"]
+    },
+    // "baseUrl": "./",
+    // "ignoreDeprecations": "6.0",
     // "outDir": "./out-tsc/app",
     "types": []
   },

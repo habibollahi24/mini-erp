@@ -10,7 +10,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AuthStore } from '../../../core/auth/auth.store';
+import { AuthStore } from '../../../store/auth.store';
 
 @Component({
   selector: 'app-login',

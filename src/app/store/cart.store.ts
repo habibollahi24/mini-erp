@@ -8,8 +8,8 @@ import {
   withState,
 } from '@ngrx/signals';
 
-import { ProductCart } from './cart.model';
-import { Product } from '../../../features/shop/shop.model';
+import { ProductCart } from '../core/store/cart/cart.model';
+import { Product } from '../features/shop/shop.model';
 
 export const CartStore = signalStore(
   { providedIn: 'root' },
@@ -90,6 +90,13 @@ export const CartStore = signalStore(
       console.log(filteredProductCart);
 
       patchState(store, { items: filteredProductCart });
+    },
+    addByQyantity(id: number, quantity: number) {
+      patchState(store, {
+        items: store
+          .items()
+          .map((item) => (item.id === id ? { ...item, quantity } : item)),
+      });
     },
   })),
   withHooks({

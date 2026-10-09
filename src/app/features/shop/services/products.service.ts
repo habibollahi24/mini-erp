@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PaginatedResponse, Product, ProductQuery } from '../../shop.model';
+import { PaginatedResponse, Product, ProductQuery } from '../shop.model';
 import { map } from 'rxjs';
 
-import { environment } from '../../../../../../environment/environment';
+import { environment } from '../../../../../environment/environment';
 
 interface QueryState {
   page: number;
@@ -28,10 +28,13 @@ export class ProductsService {
 
     let params = new HttpParams()
       .set('_expand', 'category')
-      .set('_limit', limit)
-      .set('_page', page);
+      .set('_limit', limit);
+    // .set('_page', page);
 
     //added all Fillter to Url
+    if (page !== undefined) {
+      params = params.set('_page', page);
+    }
     if (categoryId !== undefined) {
       params = params.set('categoryId', categoryId);
     }
@@ -57,5 +60,9 @@ export class ProductsService {
       params,
       observe: 'response',
     });
+  }
+
+  getById(id: number) {
+    return this.http.get<Product>(`${this.productsUrl}/${id}?_expand=category`);
   }
 }

@@ -15,7 +15,7 @@ import { OrderStatusChartComponent } from './order-status-chart/order-status-cha
 import { RecentOrderComponent } from './recent-order/recent-order.component';
 import { RecentActivitiesComponent } from './recent-activities/recent-activities.component';
 import { AuthService } from '../../auth/services/auth.service';
-import { AuthStore } from '../../../core/auth/auth.store';
+import { AuthStore } from '../../../store/auth.store';
 
 export interface StatCardData {
   title: string;

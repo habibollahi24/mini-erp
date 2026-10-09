@@ -1,0 +1,187 @@
+@let item = product.value();
+
+@if (product.isLoading()) {
+  <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 8 }" />
+} @else if (item) {
+  <div class="product-breadcrumb">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a routerLink="/shop">
+          <nz-icon nzType="home" />
+          فروشگاه
+        </a>
+      </nz-breadcrumb-item>
+
+      <nz-breadcrumb-item>
+        {{ item.category?.name }}
+      </nz-breadcrumb-item>
+
+      <nz-breadcrumb-item>
+        {{ item.name }}
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <button nz-button nzType="text" routerLink="../../">
+      بازگشت
+      <nz-icon nzType="arrow-left" nzTheme="outline" />
+    </button>
+  </div>
+  <!-- <nz-divider /> -->
+  <div class="product-details">
+    <div class="product-image">
+      <img [src]="item.images[0]" [alt]="item.name" />
+    </div>
+
+    <div class="product-info">
+      <nz-tag>{{ item.category?.name }}</nz-tag>
+      <nz-tag>{{ item.brand }}</nz-tag>
+
+      <h1>{{ item.name }}</h1>
+
+      <div class="rating">
+        <nz-rate [ngModel]="item.rating" nzDisabled nzAllowHalf />
+        <span>{{ item.rating }}</span>
+        <span> ({{ reviewCount() }} نظر) </span>
+      </div>
+
+      <nz-divider />
+
+      @if (item.discount) {
+        <span class="old-price">
+          {{ item.price | number: "1.0-0" : "fa-IR" }}
+        </span>
+
+        <nz-tag nzColor="red"> {{ item.discount }}٪ تخفیف </nz-tag>
+      }
+
+      <div class="price">
+        {{ item.finalPrice | number: "1.0-0" : "fa-IR" }}
+        <span class="toman">توما</span>
+      </div>
+
+      <p class="description">
+        {{ item.description }}
+      </p>
+
+      <div class="stock-row">
+        @if (item.stock > 0) {
+          <nz-tag nzColor="success"> موجود </nz-tag>
+
+          <span> {{ item.maxStock - item.stock }} عدد موجود است </span>
+        } @else {
+          <nz-tag nzColor="error"> ناموجود </nz-tag>
+        }
+      </div>
+
+      <nz-divider />
+
+      <div class="quantity">
+        <span>تعداد</span>
+
+        <nz-input-number
+          [ngModel]="quantity()"
+          [nzMin]="1"
+          [nzMax]="item.maxStock - item.stock"
+          (ngModelChange)="quantity.set($event)"
+        />
+      </div>
+
+      <div class="actions">
+        <button
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          (click)="addToCard(item.id)"
+        >
+          <nz-icon nzType="shopping-cart" />
+          افزودن به سبد
+        </button>
+
+        <button
+          (click)="wishlistStore.add(item)"
+          nz-button
+          nzType="text"
+          nzShape="circle"
+          class="favorite-btn"
+        >
+          <nz-icon
+            nzType="heart"
+            [nzTheme]="wishlistStore.isFavorite()(item.id) ? 'fill' : 'outline'"
+            style="color: rgb(239, 57, 57)"
+          />
+        </button>
+      </div>
+      <nz-divider />
+
+      <div class="tags">
+        @for (tag of item.tags; track tag) {
+          <nz-tag>
+            {{ tag }}
+          </nz-tag>
+        }
+      </div>
+      <div class="details-card">
+        <nz-tabs>
+          <nz-tab nzTitle="توضیحات">
+            <p class="long-description">
+              {{ item.description }}
+            </p>
+          </nz-tab>
+
+          <nz-tab nzTitle="مشخصات">
+            <nz-descriptions nzBordered [nzColumn]="1">
+              <nz-descriptions-item nzTitle="برند">
+                {{ item.brand }}
+              </nz-descriptions-item>
+
+              <nz-descriptions-item nzTitle="دسته‌بندی">
+                {{ item.category?.name }}
+              </nz-descriptions-item>
+
+              <nz-descriptions-item nzTitle="وزن">
+                {{ item.weight }} kg
+              </nz-descriptions-item>
+
+              <nz-descriptions-item nzTitle="ابعاد">
+                <!-- {{ item.dimensions.width }} × {{ item.dimensions.height }} ×
+            {{ item.dimensions.depth }} -->
+                15*20*40
+              </nz-descriptions-item>
+
+              <nz-descriptions-item nzTitle="گارانتی">
+                {{ item.warranty }}
+              </nz-descriptions-item>
+            </nz-descriptions>
+          </nz-tab>
+
+          <nz-tab nzTitle="ارسال و مرجوعی">
+            <nz-list nzBordered>
+              <nz-list-item>
+                <nz-icon nzType="car" />
+                <!-- {{ item.shippingInformation }} -->
+                پیک موتوری
+              </nz-list-item>
+
+              <nz-list-item>
+                <nz-icon nzType="safety-certificate" />
+                {{ item.warranty }}
+              </nz-list-item>
+
+              <nz-list-item>
+                <nz-icon nzType="rollback" />
+                <!-- {{ item.returnPolicy }} -->
+                بازگشت وجه
+              </nz-list-item>
+            </nz-list>
+          </nz-tab>
+        </nz-tabs>
+      </div>
+    </div>
+  </div>
+  @defer (on viewport) {
+    <shop-product-reviews [product]="product.value()" />
+  } @placeholder {
+    <div class="reviews-placeholder">نظرات مشتریان</div>
+  } @loading {
+    <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 5 }" />
+  }
+}

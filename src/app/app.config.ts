@@ -21,8 +21,8 @@ import { registerLocaleData } from '@angular/common';
 import fa from '@angular/common/locales/fa';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
-import { AuthStore } from './core/auth/auth.store';
 import { authInterceptor } from './core/auth/auth.interceptor';
+import { AuthStore } from './store/auth.store';
 
 registerLocaleData(fa);
 

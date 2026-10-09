@@ -1,0 +1,43 @@
+<section class="wishlist">
+  @if (wishlistStore.favariteProducts().length === 0) {
+    <div class="empty-state">
+      <nz-empty
+        nzNotFoundImage="simple"
+        nzNotFoundContent="محصولی در علاقه‌مندی‌های شما نیست"
+      />
+
+      <a nz-button nzType="link" routerLink="/shop"> مشاهده محصولات </a>
+    </div>
+  } @else {
+    <div class="card-container">
+      @for (product of wishlistStore.favariteProducts(); track product.id) {
+        <nz-card class="product-card" [nzBordered]="true" [nzHoverable]="true">
+          <button
+            nz-button
+            nzType="text"
+            nzShape="circle"
+            (click)="wishlistStore.add(product)"
+          >
+            <nz-icon nzType="delete" nzTheme="outline" class="trash-icon" />
+          </button>
+          <div class="product-image-wrapper">
+            <img
+              [src]="product.images[0]"
+              [alt]="product.name"
+              class="product-image"
+              [routerLink]="['/shop/product', product.id]"
+            />
+          </div>
+          <div class="product-content">
+            <h3
+              class="product-title"
+              [routerLink]="['/shop/product', product.id]"
+            >
+              {{ product.name }}
+            </h3>
+          </div>
+        </nz-card>
+      }
+    </div>
+  }
+</section>
