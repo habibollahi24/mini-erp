@@ -7,7 +7,7 @@ header {
   z-index: 2;
   //   background-color: rgb(255 255 255 / 30%);
   backdrop-filter: blur(10px);
-  border-bottom: 2px solid #f9f9f974;
+  border-bottom: 2px solid #9291911f;
   margin-bottom: 1rem;
   .container {
     max-width: 1300px;
@@ -174,4 +174,9 @@ footer {
 [nz-button] {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+::ng-deep.ant-drawer-body {
+  background-color: transparent;
 }
