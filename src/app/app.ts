@@ -1,4 +1,11 @@
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -8,6 +15,7 @@ import { ThemeSwitchService, type Theme } from './core/theme-switch.service';
 
 import { NzFloatButtonModule } from 'ng-zorro-antd/float-button';
 import { CommonModule } from '@angular/common';
+import { TrainComponent } from './train/train/train.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +28,7 @@ import { CommonModule } from '@angular/common';
     NzFloatButtonModule,
     CommonModule,
     RouterLinkWithHref,
+    TrainComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

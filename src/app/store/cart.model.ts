@@ -1,4 +1,4 @@
-import { Product } from '../../../features/shop/shop.model';
+import { Product } from '../features/shop/shop.model';
 
 export interface ProductCart extends Product {
   quantity: number;

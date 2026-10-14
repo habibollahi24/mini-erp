@@ -1,7 +1,16 @@
+:host {
+  // background-color: aqua;
+}
+
 .menu {
   height: 300px;
   position: relative;
 }
 nz-float-button-group {
   position: fixed;
+}
+
+.test {
+  --border-size: 1px;
+  border: var(--border-size) solid red;
 }

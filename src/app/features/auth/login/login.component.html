@@ -1,6 +1,12 @@
-<h2>ورود</h2>
+<h2>Login</h2>
 
-<form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()">
+<form
+  nz-form
+  [formGroup]="form"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+  autocomplete="off"
+>
   <nz-form-item>
     <nz-form-control [nzErrorTip]="emailErrorTpl">
       <nz-input-wrapper>
@@ -11,10 +17,12 @@
           nz-input
           formControlName="email"
           placeholder="ایمیل کاربری"
+          autocomplete="off"
         />
       </nz-input-wrapper>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzErrorTip]="passwordErrorTpl">
       <nz-input-password>
@@ -23,10 +31,12 @@
           nz-input
           formControlName="password"
           placeholder="رمز عبور"
+          autocomplete="off"
         />
       </nz-input-password>
     </nz-form-control>
   </nz-form-item>
+
   <div nz-row class="login-form-margin">
     <div nz-col [nzSpan]="12">
       <label nz-checkbox formControlName="remember">
@@ -34,15 +44,20 @@
       </label>
     </div>
   </div>
+
   <button
     nz-button
     [nzLoading]="authStore.loading()"
+    [disabled]="authStore.loading()"
     nzSize="large"
     class="login-form-button login-form-margin"
-    [nzType]="'primary'"
+    nzType="primary"
+    type="submit"
   >
     ورود
   </button>
+
+  <auth-demo-role-selection [form]="form" />
 </form>
 
 <ng-template #emailErrorTpl let-control>

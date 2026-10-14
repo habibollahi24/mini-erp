@@ -23,7 +23,7 @@
     }
   </div>
 </nz-spin>
-@defer {
+@defer (when !productsLoading()) {
   <shop-products-pagination [totalItems]="totalItems()" [pageSize]="pageSize" />
 } @placeholder {
   <div class="reviews-placeholder">نظرات مشتریان</div>

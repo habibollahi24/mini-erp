@@ -1,6 +1,6 @@
 <aside class="shop-sidebar">
   <div class="shop-sidebar__header">
-    <h3>فیلتر محصولات</h3>
+    <h3>فیلتر‌‌‌‌‌‌‌ محصولات</h3>
 
     <button
       nz-button
@@ -16,7 +16,7 @@
 
   <nz-collapse nzGhost>
     <!-- Category -->
-    <nz-collapse-panel nzHeader="دسته‌بندی" [nzActive]="false">
+    <nz-collapse-panel nzHeader="دسته‌بندی" [nzActive]="true">
       <shop-category-filter />
     </nz-collapse-panel>
     <nz-divider></nz-divider>
@@ -33,7 +33,7 @@
     <!-- بعداً -->
     <nz-divider></nz-divider>
     <!-- Sort -->
-    <nz-collapse-panel nzHeader="مرتب‌سازی" [nzActive]="true">
+    <nz-collapse-panel nzHeader="مرتب‌سازی" [nzActive]="false">
       <shop-sort-filter />
     </nz-collapse-panel>
   </nz-collapse>

@@ -10,14 +10,18 @@
   }
 </nz-select> -->
 
-<nz-radio-group
-  [ngModel]="selectedBrand()"
-  (ngModelChange)="onBrandChange($event)"
-  nzName="radiogroup"
->
-  @for (brand of brands(); track brand.id) {
-    <label nz-radio [nzValue]="brand.name">
-      {{ brand.name }}
-    </label>
-  }
-</nz-radio-group>
+@if (isSelectedCategory()) {
+  <nz-radio-group
+    [ngModel]="selectedBrand()"
+    (ngModelChange)="onBrandChange($event)"
+    nzName="radiogroup"
+  >
+    @for (brand of brands(); track brand.id) {
+      <label nz-radio [nzValue]="brand.name">
+        {{ brand.name }}
+      </label>
+    }
+  </nz-radio-group>
+} @else {
+  <span> یک دسته‌بندی انتخاب کنید</span>
+}

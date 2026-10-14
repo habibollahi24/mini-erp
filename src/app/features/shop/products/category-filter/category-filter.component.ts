@@ -4,8 +4,8 @@ import { Category } from '../../shop.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
-import { map } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, tap } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'shop-category-filter',
@@ -21,19 +21,11 @@ export class CategoryFilterComponent {
   readonly categories = signal<Category[]>([]);
   readonly categoriesLoading = signal(false);
 
-  readonly categorySelected = signal<number | null>(null);
+  readonly categoryIdUrl$ = this.route.queryParamMap.pipe(
+    map((params) => Number(params.get('categoryId')) ?? null),
+  );
 
-  constructor() {
-    this.route.queryParamMap
-      .pipe(
-        map((params) => Number(params.get('categoryId')) ?? null),
-        takeUntilDestroyed(),
-      )
-      .subscribe((value) => {
-        console.log('vvvvvvv', value);
-        this.categorySelected.set(value);
-      });
-  }
+  readonly categorySelected = toSignal(this.categoryIdUrl$);
 
   ngOnInit(): void {
     this.loadCategories();

@@ -1,5 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -37,6 +37,7 @@ export class ShopLayoutComponent {
   readonly cartStore = inject(CartStore);
   readonly authStore = inject(AuthStore);
   readonly wishlistStore = inject(WishlistStore);
+  readonly router = inject(Router);
 
   constructor() {
     effect(() => {
@@ -66,6 +67,14 @@ export class ShopLayoutComponent {
   checkout() {}
 
   logout() {
-    this.authStore.logout();
+    this.authStore.logout$().subscribe({
+      next: (res) => {
+        this.router.navigateByUrl('');
+      },
+
+      error: () => {
+        this.router.navigateByUrl('');
+      },
+    });
   }
 }

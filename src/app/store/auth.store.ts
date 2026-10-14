@@ -9,13 +9,13 @@ import {
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import {
   catchError,
-  concatMap,
-  EMPTY,
   Observable,
   of,
   pipe,
   switchMap,
   tap,
+  throwError,
+  timeout,
 } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import {
@@ -65,39 +65,29 @@ export const AuthStore = signalStore(
       });
     },
 
-    login: rxMethod<LoginDto>(
-      pipe(
-        tap(() => {
+    login$(credentials: LoginDto) {
+      patchState(store, {
+        loading: true,
+        error: null,
+      });
+      return authService.login(credentials).pipe(
+        tap((response) =>
           patchState(store, {
-            loading: true,
+            user: response.user,
+            accessToken: response.accessToken,
+            loading: false,
             error: null,
-          });
-        }),
-
-        switchMap((credentials) =>
-          authService.login(credentials).pipe(
-            tapResponse({
-              next: (response: AuthResponse) => {
-                patchState(store, {
-                  user: response.user,
-                  accessToken: response.accessToken,
-                  loading: false,
-                  error: null,
-                });
-              },
-
-              error: (error: { error: { message: string } }) => {
-                console.log('error in auth store', error);
-                patchState(store, {
-                  loading: false,
-                  error: error?.error?.message ?? 'Login failed',
-                });
-              },
-            }),
-          ),
+          }),
         ),
-      ),
-    ),
+        catchError((error: { error: { message: string } }) => {
+          patchState(store, {
+            loading: false,
+            error: error?.error?.message ?? 'Login failed',
+          });
+          return throwError(() => error);
+        }),
+      );
+    },
 
     register: rxMethod<RegisterDto>(
       pipe(
@@ -132,44 +122,35 @@ export const AuthStore = signalStore(
       ),
     ),
 
-    logout: rxMethod<void>(
-      pipe(
-        tap(() => {
+    logout$() {
+      patchState(store, {
+        loading: true,
+        error: null,
+      });
+
+      return authService.logout().pipe(
+        tap(() =>
           patchState(store, {
-            loading: true,
+            user: null,
+            accessToken: null,
+            loading: false,
             error: null,
-          });
-        }),
-
-        switchMap(() =>
-          authService.logout().pipe(
-            tapResponse({
-              next: () => {
-                patchState(store, {
-                  user: null,
-                  accessToken: null,
-                  loading: false,
-                  error: null,
-                });
-              },
-
-              error: () => {
-                // حتی اگر logout API خطا داد،
-                // سمت Angular باید از حساب خارج شود.
-                patchState(store, {
-                  user: null,
-                  accessToken: null,
-                  loading: false,
-                });
-              },
-            }),
-          ),
+          }),
         ),
-      ),
-    ),
+        catchError((error) => {
+          patchState(store, {
+            user: null,
+            accessToken: null,
+            loading: false,
+          });
+          return throwError(() => error);
+        }),
+      );
+    },
 
     initialize$(): Observable<MeResponse> {
       return authService.refresh().pipe(
+        // delay(25000),
         tap(({ accessToken }) => {
           patchState(store, {
             accessToken,
@@ -177,7 +158,7 @@ export const AuthStore = signalStore(
         }),
 
         switchMap(({ accessToken }) => authService.me()),
-
+        timeout(20000),
         tap(({ user }) => {
           patchState(store, {
             user,

@@ -11,7 +11,7 @@ export function mapParamsToProductQuery(
   const maxPrice = params.get('maxPrice');
 
   return {
-    page: Number(params.get('page')) ?? undefined,
+    page: Number(params.get('page')),
 
     limit: pageSize,
 

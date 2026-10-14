@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrandsService } from '../../services/brands.service';
 import { Brand } from '../../shop.model';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'shop-brand-filter',
@@ -18,16 +19,25 @@ export class BrandFilterComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly brandService = inject(BrandsService);
 
+  readonly isSelectedCategory = signal(false);
+
   readonly brands = signal<Brand[]>([]);
   readonly selectedBrand = signal<string | null>(null);
+
+  selectedCategorySubject = new Subject<boolean>();
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const categoryId = params.get('categoryId');
       const brand = params.get('brand');
 
-      this.selectedBrand.set(brand);
+      if (!categoryId) {
+        this.isSelectedCategory.set(false);
+        return;
+      }
 
+      this.selectedBrand.set(brand);
+      this.isSelectedCategory.set(true);
       this.loadBrands(categoryId ? Number(categoryId) : undefined);
     });
   }

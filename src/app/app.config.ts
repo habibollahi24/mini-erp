@@ -30,6 +30,7 @@ const ngZorroConfig: NzConfig = {
   theme: {
     primaryColor: '#4f39f6',
   },
+  message: { nzDirection: 'rtl' },
 };
 
 export const appConfig: ApplicationConfig = {
@@ -46,7 +47,6 @@ export const appConfig: ApplicationConfig = {
     provideNzIcons(icons),
     provideNzI18n(fa_IR),
     provideAnimationsAsync(),
-    provideHttpClient(),
     provideNzConfig(ngZorroConfig),
     {
       provide: LOCALE_ID,

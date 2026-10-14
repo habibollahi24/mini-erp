@@ -8,7 +8,7 @@ import {
   withState,
 } from '@ngrx/signals';
 
-import { ProductCart } from '../core/store/cart/cart.model';
+import { ProductCart } from './cart.model';
 import { Product } from '../features/shop/shop.model';
 
 export const CartStore = signalStore(

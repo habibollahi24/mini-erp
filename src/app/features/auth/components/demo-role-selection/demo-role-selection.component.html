@@ -1,0 +1,58 @@
+@if (!authStore.loading()) {
+  <div class="demo-section">
+    <p class="demo-description">
+      برای مشاهده دمو، یکی از نقش‌ها را انتخاب کنید.
+    </p>
+
+    <div class="demo-roles">
+      <button
+        type="button"
+        nz-button
+        nzType="default"
+        class="demo-role"
+        [class.demo-role-selected]="selectedDemoRole() === 'customer'"
+        (click)="selectDemoRole('customer')"
+      >
+        <nz-icon nzType="shopping" />
+        <span>مشتری</span>
+      </button>
+
+      <button
+        type="button"
+        nz-button
+        nzType="default"
+        class="demo-role"
+        [class.demo-role-selected]="selectedDemoRole() === 'employee'"
+        (click)="selectDemoRole('employee')"
+        disabled="true"
+      >
+        <nz-icon nzType="user" />
+        <span>کارمند</span>
+      </button>
+
+      <button
+        type="button"
+        nz-button
+        nzType="default"
+        class="demo-role"
+        [class.demo-role-selected]="selectedDemoRole() === 'manager'"
+        (click)="selectDemoRole('manager')"
+      >
+        <nz-icon nzType="team" />
+        <span>مدیر</span>
+      </button>
+
+      <button
+        type="button"
+        nz-button
+        nzType="default"
+        class="demo-role"
+        [class.demo-role-selected]="selectedDemoRole() === 'admin'"
+        (click)="selectDemoRole('admin')"
+      >
+        <nz-icon nzType="safety-certificate" />
+        <span>ادمین</span>
+      </button>
+    </div>
+  </div>
+}

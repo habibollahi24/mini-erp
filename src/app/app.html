@@ -1,5 +1,12 @@
 <router-outlet></router-outlet>
-<!-- <nz-icon nzType="format-painter" nzTheme="outline" /> -->
+
+<!-- <app-train data="gg" #c></app-train>
+<button [style.backgroundColor]="c.color()">vv</button>
+
+<li akbar>fddf</li>
+<li akbar>fddf</li>
+<li akbar>fddf</li> -->
+
 <div>
   <nz-float-button-group
     nzIcon="format-painter"
@@ -16,16 +23,21 @@
     ></nz-float-button>
   </nz-float-button-group>
 </div>
-<div
+
+<!-- <div
   style="
+    /* --test-color: lime; */
+
     display: inline-flex;
     flex-direction: column;
     position: relative;
     z-index: 5;
-    background-color: gold;
+    /* background-color: var(--test-color); */
   "
+  class="test"
+  [style.--border-size.px]="'5'"
 >
   <a routerLink="auth">auth</a>
   <a routerLink="admin">admin</a>
   <a routerLink="">shop</a>
-</div>
+</div> -->
