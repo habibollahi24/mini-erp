@@ -27,8 +27,6 @@ import { TrainComponent } from './train/train/train.component';
     NzButtonModule,
     NzFloatButtonModule,
     CommonModule,
-    RouterLinkWithHref,
-    TrainComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
