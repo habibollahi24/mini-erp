@@ -1,0 +1,9 @@
+<div class="avatar" [style.width.px]="size()" [style.height.px]="size()">
+  @if (src() && !imageFailed()) {
+    <img [src]="src()" [alt]="name()" (error)="onImageError()" />
+  } @else {
+    <span>
+      {{ name()?.trim()?.charAt(0)?.toLocaleUpperCase() || "?" }}
+    </span>
+  }
+</div>

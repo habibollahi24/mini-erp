@@ -47,7 +47,12 @@
       </div>
       <div class="avtar-card">
         <div class="sidebar-avatar">
-          <img [src]="user?.avatar" />
+          <!-- <img [src]="user?.avatar" /> -->
+          <app-user-avatar
+            [name]="user?.name"
+            [src]="user?.avatar"
+            [size]="52"
+          />
           <div class="info">
             <p>{{ user?.name }}</p>
             <p>{{ user?.email }}</p>
@@ -60,12 +65,36 @@
   <nz-layout>
     <!-- header -->
     <nz-header style="position: sticky; top: 0">
-      <div>
+      <div class="header-container">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <button nz-button nzType="default" nzShape="circle">
             <nz-icon class="trigge" nzType="menu" nzTheme="outline" />
           </button>
         </span>
+        <div class="button-container">
+          <button
+            nz-button
+            nz-tooltip="  فروشگاه "
+            nzType="dashed"
+            [nzSize]="'small'"
+            nzShape="round"
+            routerLink="/shop"
+          >
+            فروشگاه
+            <nz-icon nzType="shop" nzTheme="outline" />
+          </button>
+          <button
+            nz-button
+            nz-tooltip=" خروج از اپ"
+            nzType="dashed"
+            [nzSize]="'small'"
+            nzShape="round"
+            (click)="logout()"
+          >
+            خروج
+            <nz-icon nzType="logout" nzTheme="outline" />
+          </button>
+        </div>
       </div>
     </nz-header>
     <!-- content -->

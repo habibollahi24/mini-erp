@@ -28,31 +28,43 @@
             <nz-icon nzType="heart" nzTheme="outline" style="font-size: 1rem" />
           </button>
         </nz-badge>
-
-        <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
-          <nz-icon nzType="lock" nzTheme="outline" />
-        </button>
-
-        <button nz-button nzType="default" [nzSize]="'small'" nzShape="round">
-          <nz-icon nzType="unlock" nzTheme="outline" />
-        </button>
-
-        <button
-          nz-button
-          nz-tooltip=" خروج از اپ"
-          nzType="default"
-          [nzSize]="'small'"
-          nzShape="round"
-          (click)="logout()"
-        >
-          <nz-icon nzType="logout" nzTheme="outline" />
-        </button>
       </div>
 
       @if (authStore.isAuthenticated()) {
-        <div class="avatar" routerLink="profile">
-          <div>{{ authStore.user()?.name }}</div>
-          <nz-avatar [nzText]="authStore.user()?.name?.[0]"></nz-avatar>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <div class="avatar" routerLink="profile">
+            <div>{{ authStore.user()?.name }}</div>
+            <app-user-avatar
+              [name]="authStore.user()?.name"
+              [src]="authStore.user()?.avatar"
+              [size]="36"
+            />
+            <!-- <nz-avatar [nzText]="authStore.user()?.name?.[0]"></nz-avatar> -->
+          </div>
+          @if (authStore.user()?.role !== "customer") {
+            <button
+              nz-button
+              nz-tooltip="  پنل ادمین "
+              nzType="dashed"
+              [nzSize]="'small'"
+              nzShape="round"
+              routerLink="/admin"
+            >
+              پنل ادمین
+              <nz-icon nzType="fund" nzTheme="outline" />
+            </button>
+          }
+          <button
+            nz-button
+            nz-tooltip=" خروج از اپ"
+            nzType="dashed"
+            [nzSize]="'small'"
+            nzShape="round"
+            (click)="logout()"
+          >
+            خروج
+            <nz-icon nzType="logout" nzTheme="outline" />
+          </button>
         </div>
       } @else {
         <button
@@ -63,6 +75,7 @@
           nzShape="round"
           routerLink="/auth"
         >
+          ورود
           <nz-icon nzType="login" nzTheme="outline" />
         </button>
       }

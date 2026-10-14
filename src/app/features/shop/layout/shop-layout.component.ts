@@ -13,6 +13,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 import { WishlistStore } from '../../../store/wishlist.store';
 import { AuthStore } from '../../../store/auth.store';
+import { UserAvatarComponent } from '../../../shared/components/user-avatar/user-avatar.component';
 
 @Component({
   selector: 'app-shop-layout',
@@ -29,6 +30,7 @@ import { AuthStore } from '../../../store/auth.store';
     NzAvatarModule,
     RouterLink,
     NzTooltipModule,
+    UserAvatarComponent,
   ],
   templateUrl: './shop-layout.component.html',
   styleUrl: './shop-layout.component.scss',

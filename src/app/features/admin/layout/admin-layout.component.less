@@ -34,6 +34,13 @@
   background-color: transparent;
 }
 
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-end: 1rem;
+}
+
 .header-trigger {
   font-size: 20px;
   cursor: pointer;
@@ -140,5 +147,14 @@ nz-content {
       margin: 0;
       padding: 0;
     }
+  }
+}
+.button-container {
+  display: flex;
+  gap: 10px;
+  [nz-button] {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
   }
 }

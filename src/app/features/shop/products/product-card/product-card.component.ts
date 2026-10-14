@@ -13,6 +13,7 @@ import { Product } from '../../shop.model';
 import { CartStore } from '../../../../store/cart.store';
 import { WishlistStore } from '../../../../store/wishlist.store';
 import { RouterLink } from '@angular/router';
+import { ImageFallbackDirective } from '../../../../shared/directives/image-fallback.directive';
 
 @Component({
   selector: 'shop-product-card',
@@ -27,6 +28,7 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     CommonModule,
     RouterLink,
+    ImageFallbackDirective,
   ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.less',
