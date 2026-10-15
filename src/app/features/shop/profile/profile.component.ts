@@ -14,6 +14,10 @@ import { ProfileOrdersComponent } from './profile-orders/profile-orders.componen
 import { AuthStore } from '../../../store/auth.store';
 import { ProfileWishlistComponent } from './profile-wishlist/profile-wishlist.component';
 
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+
 @Component({
   selector: 'app-profile',
   imports: [
@@ -35,6 +39,14 @@ import { ProfileWishlistComponent } from './profile-wishlist/profile-wishlist.co
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
+  private breakpointObserver = inject(BreakpointObserver);
   private readonly authStore = inject(AuthStore);
   readonly user = this.authStore.user;
+
+  isMobile = toSignal(
+    this.breakpointObserver
+      .observe(Breakpoints.Handset)
+      .pipe(map((result) => result.matches)),
+    { initialValue: false },
+  );
 }

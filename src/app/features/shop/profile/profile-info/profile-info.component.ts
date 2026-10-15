@@ -5,6 +5,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { AuthStore } from '../../../../store/auth.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shop-profile-info',
@@ -20,5 +21,18 @@ import { AuthStore } from '../../../../store/auth.store';
 })
 export class ProfileInfoComponent {
   private readonly authStore = inject(AuthStore);
+  private readonly router = inject(Router);
   readonly user = this.authStore.user;
+
+  logout() {
+    this.authStore.logout$().subscribe({
+      next: (res) => {
+        this.router.navigateByUrl('');
+      },
+
+      error: () => {
+        this.router.navigateByUrl('');
+      },
+    });
+  }
 }

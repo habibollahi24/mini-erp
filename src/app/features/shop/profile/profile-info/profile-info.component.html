@@ -64,11 +64,12 @@
   <nz-card nzTitle="امنیت حساب" class="security-card">
     <div class="security-row">
       <div>
-        <strong>رمز عبور</strong>
-        <p>برای امنیت بیشتر، رمز عبور خود را مدیریت کنید.</p>
+        <strong>
+          <button (click)="logout()" nz-button nzDanger>
+            خروج از حساب کاربری
+          </button></strong
+        >
       </div>
-
-      <button nz-button>تغییر رمز عبور</button>
     </div>
   </nz-card>
 }

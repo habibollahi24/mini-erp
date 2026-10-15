@@ -1,7 +1,12 @@
 nz-tabs {
   margin-top: 2rem;
+  padding: 0.7rem;
 }
 
 nz-tab {
   background-color: red !important;
+}
+.title-tab {
+  display: inline-block;
+  // width: 75px;
 }

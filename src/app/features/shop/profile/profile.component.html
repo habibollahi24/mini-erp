@@ -10,11 +10,11 @@
     <nz-breadcrumb-item> پروفایل </nz-breadcrumb-item>
   </nz-breadcrumb>
 
-  <nz-tabs nzTabPosition="right" nzSize="small">
+  <nz-tabs [nzTabPosition]="isMobile() ? 'top' : 'right'" nzSize="small">
     <nz-tab [nzTitle]="infoTemplate">
       <ng-template #infoTemplate>
         <nz-icon nzType="user" />
-        حساب کاربری من
+        <span class="title-tab"> حساب کاربری من</span>
       </ng-template>
       <shop-profile-info></shop-profile-info>
     </nz-tab>
@@ -22,7 +22,7 @@
       <ng-template #orderTemplate>
         <nz-icon nzType="shopping" nzTheme="outline" />
 
-        سفارش های من
+        <span class="title-tab">سفارش های من</span>
       </ng-template>
       <shop-profile-orders></shop-profile-orders>
     </nz-tab>
@@ -30,7 +30,7 @@
     <nz-tab [nzTitle]="FavoriteTemplate">
       <ng-template #FavoriteTemplate>
         <nz-icon nzType="heart" />
-        علاقه مندی های من
+        <span class="title-tab">علاقه مندی های من</span>
       </ng-template>
       <shop-profile-wishlist></shop-profile-wishlist>
     </nz-tab>
