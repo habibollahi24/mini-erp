@@ -7,6 +7,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { RouterLink } from '@angular/router';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ImageFallbackDirective } from '../../../../shared/directives/image-fallback.directive';
 
 @Component({
   selector: 'shop-profile-wishlist',
@@ -18,6 +19,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     RouterLink,
     NzCardModule,
     NzButtonModule,
+    ImageFallbackDirective,
   ],
   templateUrl: './profile-wishlist.component.html',
   styleUrl: './profile-wishlist.component.scss',

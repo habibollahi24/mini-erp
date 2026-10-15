@@ -20,14 +20,17 @@
           >
             <nz-icon nzType="delete" nzTheme="outline" class="trash-icon" />
           </button>
+
           <div class="product-image-wrapper">
             <img
               [src]="product.images[0]"
               [alt]="product.name"
               class="product-image"
               [routerLink]="['/shop/product', product.id]"
+              appImageFallback="/placeholder.png"
             />
           </div>
+
           <div class="product-content">
             <h3
               class="product-title"
