@@ -55,9 +55,9 @@ header {
   h1 {
     display: inline-block;
     // margin: 0 10px 0 0;
-    // color: @primary-color;
+    color: var(--ant-primary);
     // color: whitesmoke;
-    color: #b52b6e;
+    // color: #b52b6e;
     text-decoration: line-through;
     margin: 0;
     font-weight: 900;
