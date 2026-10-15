@@ -1,12 +1,30 @@
 <div nz-row [nzGutter]="[16]">
-  <div nz-col nzSpan="5">
-    <aside class="shop__sidebar">
+  <div nz-col nzSpan="0" [nzXs]="0" [nzSm]="0" [nzMd]="5" [nzLg]="5">
+    <div class="shop__sidebar">
       <shop-shop-sidebar />
-    </aside>
+    </div>
   </div>
 
-  <div nz-col nzSpan="19">
-    <shop-search-box></shop-search-box>
-    <shop-product-list></shop-product-list>
+  <div nz-col nzSpan="24" [nzXs]="24" [nzSm]="24" [nzMd]="19" [nzLg]="19">
+    <div class="main-shop">
+      <button nz-button nzType="primary" (click)="open()">فیلتر محصولات</button>
+
+      <shop-search-box></shop-search-box>
+
+      <shop-product-list></shop-product-list>
+    </div>
   </div>
 </div>
+<!-- [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" -->
+<nz-drawer
+  [nzSize]="'large'"
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="bottom"
+  nzTitle="فیلتر محصولات "
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <shop-shop-sidebar />
+  </ng-container>
+</nz-drawer>

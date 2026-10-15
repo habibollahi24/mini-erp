@@ -16,7 +16,7 @@
       <nz-empty nzNotFoundContent="محصولی پیدا نشد" />
     } @else {
       @for (product of products(); track product.id) {
-        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6">
+        <div nz-col [nzXs]="24" [nzSm]="8" [nzMd]="8" [nzLg]="8" [nzXl]="6">
           <shop-product-card [product]="product" />
         </div>
       }

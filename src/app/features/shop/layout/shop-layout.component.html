@@ -2,9 +2,9 @@
   <div class="container">
     <nav>
       <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
-          <img src="/favicon.ico" alt="logo" />
-          <h1>ng24</h1>
+        <a routerLink="/">
+          <!-- <img src="/favicon.ico" alt="logo" /> -->
+          <h1>NG<small style="font-family: sans-serif">24</small></h1>
         </a>
       </div>
       <div style="display: flex; gap: 10px">
@@ -33,7 +33,7 @@
       @if (authStore.isAuthenticated()) {
         <div style="display: flex; gap: 10px; align-items: center">
           <div class="avatar" routerLink="profile">
-            <div>{{ authStore.user()?.name }}</div>
+            <div class="avatar-name">{{ authStore.user()?.name }}</div>
             <app-user-avatar
               [name]="authStore.user()?.name"
               [src]="authStore.user()?.avatar"
@@ -54,7 +54,7 @@
               <nz-icon nzType="fund" nzTheme="outline" />
             </button>
           }
-          <button
+          <!-- <button
             nz-button
             nz-tooltip=" خروج از اپ"
             nzType="dashed"
@@ -64,7 +64,7 @@
           >
             خروج
             <nz-icon nzType="logout" nzTheme="outline" />
-          </button>
+          </button> -->
         </div>
       } @else {
         <button
