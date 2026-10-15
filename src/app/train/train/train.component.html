@@ -1,7 +1,40 @@
-<h2 appTrain [(color)]="color" akbar #td="td">title</h2>
-<p>
-  Lorem {{ data().length }} ipsum dolor sit amet consectetur adipisicing elit.
-  Repellendus, sit?
-</p>
+<div>app train here1</div>
+<div>app train 2</div>
+<button (click)="onClik()">click</button>
 
-<button [style.backgroundColor]="td.dColor">td</button>
+<ng-container #container>
+  <div>in divition</div>
+</ng-container>
+
+<div>app train 3</div>
+
+<div>app train 47</div>
+<div class="red">
+  <div>in container</div>
+  <div>in container</div>
+  <div>in container</div>
+  <div>in container</div>
+</div>
+<ng-container
+  [ngTemplateOutlet]="temp"
+  [ngTemplateOutletContext]="{
+    $implicit: 'hasaniiyy',
+    family: 'hashemi',
+    degree: 'mohandes',
+  }"
+>
+  <div>in container</div>
+  <div>in container</div>
+  <div>in container</div>
+  <div>in container</div>
+</ng-container>
+
+<ng-template #temp let-usename let-family="family" let-degree="degree">
+  <div>
+    hi ,mamad {{ color() }} / {{ usename }} / {{ family }} / {{ degree }}
+  </div>
+</ng-template>
+
+<ng-template #name>
+  <div>i am name template</div>
+</ng-template>
